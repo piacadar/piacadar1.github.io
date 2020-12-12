@@ -25,7 +25,6 @@ import pandas as pd
 #using reticulate
 quakes = r.quakes
 
-# your code here
 print(quakes.head())
 quakes.shape
 
@@ -46,13 +45,17 @@ np.median(quakes[quakes.long>175].mag)
 ```
 
 ### Reticulate can also be used to grab code from python and use it in R
+
+#### Python
 ```{python}
 import pandas as pd
 quakes=pd.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/quakes.csv",index_col=0)
 
 ```
 
+#### R
 ```{r}
+#using Reticulate
 df <- py$quakes
 
 mean_mag <- mean(quakes$mag)

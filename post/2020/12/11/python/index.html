@@ -90,7 +90,6 @@ quakes &lt;- quakes</code></pre>
 #using reticulate
 quakes = r.quakes
 
-# your code here
 print(quakes.head())</code></pre>
 <pre><code>##      lat    long  depth  mag  stations
 ## 0 -20.42  181.62    562  4.8        41
@@ -134,9 +133,15 @@ np.median(quakes[quakes.long&gt;175].mag)</code></pre>
 </div>
 <div id="reticulate-can-also-be-used-to-grab-code-from-python-and-use-it-in-r" class="section level3">
 <h3>Reticulate can also be used to grab code from python and use it in R</h3>
+<div id="python-1" class="section level4">
+<h4>Python</h4>
 <pre class="python"><code>import pandas as pd
 quakes=pd.read_csv(&quot;https://vincentarelbundock.github.io/Rdatasets/csv/datasets/quakes.csv&quot;,index_col=0)</code></pre>
-<pre class="r"><code>df &lt;- py$quakes
+</div>
+<div id="r-1" class="section level4">
+<h4>R</h4>
+<pre class="r"><code>#using Reticulate
+df &lt;- py$quakes
 
 mean_mag &lt;- mean(quakes$mag)
 min_mag &lt;- min(quakes$mag)
@@ -153,6 +158,7 @@ paste(&quot;Mean mag: &quot;, mean_mag)</code></pre>
 <pre><code>## [1] &quot;Median mag:  4.6&quot;</code></pre>
 <center>
 <p><img src="../../../../../post/2020-12-11-python_files/IMG_6142.jpg" />{width = 80%}</p>
+</div>
 </div>
 
             
