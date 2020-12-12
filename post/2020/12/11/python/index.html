@@ -70,6 +70,91 @@
           <div class="panel-body">
             <div class="blogpost">
               
+<link href="../../../../../rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="../../../../../rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="reticulate-is-used-to-grab-the-quakes-dataset-from-r-and-use-it-in-a-python-script" class="section level3">
+<h3>Reticulate is used to grab the quakes dataset from R and use it in a python script</h3>
+<div id="r" class="section level4">
+<h4>R</h4>
+<pre class="r"><code>library(reticulate)
+library(ggplot2)
+
+quakes &lt;- quakes</code></pre>
+</div>
+<div id="python" class="section level4">
+<h4>Python</h4>
+<pre class="python"><code>import pandas as pd
+
+#using reticulate
+quakes = r.quakes
+
+# your code here
+print(quakes.head())</code></pre>
+<pre><code>##      lat    long  depth  mag  stations
+## 0 -20.42  181.62    562  4.8        41
+## 1 -20.62  181.03    650  4.2        15
+## 2 -26.00  184.10     42  5.4        43
+## 3 -17.97  181.66    626  4.1        19
+## 4 -20.42  181.96    649  4.0        11</code></pre>
+<pre class="python"><code>quakes.shape
+</code></pre>
+<pre><code>## (1000, 5)</code></pre>
+</div>
+</div>
+<div id="describe-can-be-used-to-find-the-mean-median-min-and-max-of-a-variable-in-the-dataset" class="section level3">
+<h3>Describe can be used to find the mean, median, min, and max of a variable in the dataset</h3>
+<pre class="python"><code>print(&#39;quakes.mag:&#39;, quakes.mag.describe())</code></pre>
+<pre><code>## quakes.mag: count    1000.000000
+## mean        4.620400
+## std         0.402773
+## min         4.000000
+## 25%         4.300000
+## 50%         4.600000
+## 75%         4.900000
+## max         6.400000
+## Name: mag, dtype: float64</code></pre>
+<pre class="python"><code>print(&#39;quakes.depth:&#39;, quakes.depth.describe())</code></pre>
+<pre><code>## quakes.depth: count    1000.000000
+## mean      311.371000
+## std       215.535498
+## min        40.000000
+## 25%        99.000000
+## 50%       247.000000
+## 75%       543.000000
+## max       680.000000
+## Name: depth, dtype: float64</code></pre>
+</div>
+<div id="numpy-is-then-used-to-find-the-median-magnitude-for-quakes-whose-longitude-is-greater-than-175" class="section level3">
+<h3>Numpy is then used to find the median magnitude for quakes whose longitude is greater than 175</h3>
+<pre class="python"><code>import numpy as np
+np.median(quakes[quakes.long&gt;175].mag)</code></pre>
+<pre><code>## 4.5</code></pre>
+</div>
+<div id="reticulate-can-also-be-used-to-grab-code-from-python-and-use-it-in-r" class="section level3">
+<h3>Reticulate can also be used to grab code from python and use it in R</h3>
+<pre class="python"><code>import pandas as pd
+quakes=pd.read_csv(&quot;https://vincentarelbundock.github.io/Rdatasets/csv/datasets/quakes.csv&quot;,index_col=0)</code></pre>
+<pre class="r"><code>df &lt;- py$quakes
+
+mean_mag &lt;- mean(quakes$mag)
+min_mag &lt;- min(quakes$mag)
+max_mag &lt;- max(quakes$mag)
+med_mag &lt;- median(quakes$mag)
+
+paste(&quot;Mean mag: &quot;, mean_mag)</code></pre>
+<pre><code>## [1] &quot;Mean mag:  4.6204&quot;</code></pre>
+<pre class="r"><code>paste(&quot;Min mag: &quot;, min_mag)</code></pre>
+<pre><code>## [1] &quot;Min mag:  4&quot;</code></pre>
+<pre class="r"><code>paste(&quot;Max mag: &quot;, max_mag)</code></pre>
+<pre><code>## [1] &quot;Max mag:  6.4&quot;</code></pre>
+<pre class="r"><code>paste(&quot;Median mag: &quot;, med_mag)</code></pre>
+<pre><code>## [1] &quot;Median mag:  4.6&quot;</code></pre>
+<center>
+<p><img src="../../../../../post/2020-12-11-python_files/IMG_6142.jpg" />{width = 80%}</p>
+</div>
+
             
         <hr>         <div class="related-posts">
                 <h5>Related Posts</h5>

@@ -237,7 +237,7 @@ Fs &lt;- replicate(1000, {
 }</code></pre>
 <p><img src="../../project/project2_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>mean(Fs &gt; F_obs)</code></pre>
-<pre><code>## [1] 0.001</code></pre>
+<pre><code>## [1] 0</code></pre>
 <p><em>H0 : For each response variable, the means of all groups are equal. HA : For at least 1 response variable, at least 1 group mean differs. The results from the randomized test were significant, indicating that the null hypothesis can be rejected, and that at least 1 group mean differs for at least 1 response variable. In 1000 replications, there was never a value as big as <span class="math inline">\(F_{obs}\)</span>. Thus, the empirical p-value is 0 (definitely reject the null hypothesis). The p-value from running adonis was also significant, indicating again that the null hypothesis should be rejected.</em></p>
 </div>
 <div id="q3.-linear-regression-model" class="section level2">
@@ -324,7 +324,7 @@ samp_distn &lt;- replicate(5000, {
 ## Estimated/boostrap SEs
 samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd)</code></pre>
 <pre><code>##   (Intercept) yearsmarried gendermale yearsmarried:gendermale
-## 1   0.3321088   0.05514849  0.6827903              0.09087076</code></pre>
+## 1    0.335787   0.05563508  0.6733266               0.0913851</code></pre>
 <pre class="r"><code>## Empirical 95% CI
 samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% pivot_longer(1:3) %&gt;% 
     group_by(name) %&gt;% summarize(lower = quantile(value, 
@@ -333,7 +333,7 @@ samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% pivot_longer(1:3) %&gt;%
 ##   name         lower upper
 ##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
 ## 1 (Intercept)  20.0  21.3 
-## 2 gendermale    1.30  4.01
+## 2 gendermale    1.31  3.92
 ## 3 yearsmarried  1.15  1.37</code></pre>
 <pre class="r"><code># comparison of SEs Normal-theory SEs
 coeftest(fit)</code></pre>
@@ -362,7 +362,7 @@ coeftest(fit, vcov = vcovHC(fit))</code></pre>
 <pre class="r"><code>## Bootstrapped SEs (resampling rows)
 samp_distn %&gt;% t %&gt;% as.data.frame %&gt;% summarize_all(sd)</code></pre>
 <pre><code>##   (Intercept) yearsmarried gendermale yearsmarried:gendermale
-## 1   0.3321088   0.05514849  0.6827903              0.09087076</code></pre>
+## 1    0.335787   0.05563508  0.6733266               0.0913851</code></pre>
 <p><em>The SEs between all the tests were similar, with Heteroskedasticity SEs begin in the middle and Bootstrapped SEs being the largest. While the p-values changed between the Normal-theory SEs and Heteroskedasticity SEs, they values were still significant.</em></p>
 </div>
 <div id="q5.-logistic-regression" class="section level2">
@@ -635,7 +635,7 @@ diags %&gt;% summarize_all(mean)</code></pre>
 ## [69] gtable_0.3.0      assertthat_0.2.1  xfun_0.19         openxlsx_4.1.5   
 ## [73] broom_0.7.0       survival_3.2-3    iterators_1.0.12  cluster_2.1.0    
 ## [77] ellipsis_0.3.1</code></pre>
-<pre><code>## [1] &quot;2020-12-11 12:56:24 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2020-12-11 21:26:03 CST&quot;</code></pre>
 <pre><code>##                                       sysname 
 ##                                       &quot;Linux&quot; 
 ##                                       release 

@@ -1,0 +1,71 @@
+---
+title: "Python"
+author: "Pia Cadar"
+date: '2020-12-11'
+description: ''
+slug: python
+tags: []
+categories: []
+---
+
+### Reticulate is used to grab the quakes dataset from R and use it in a python script
+#### R
+```{R}
+library(reticulate)
+library(ggplot2)
+
+quakes <- quakes
+
+```
+
+#### Python
+```{python}
+import pandas as pd
+
+#using reticulate
+quakes = r.quakes
+
+# your code here
+print(quakes.head())
+quakes.shape
+
+
+```
+
+### Describe can be used to find the mean, median, min, and max of a variable in the dataset 
+```{python}
+print('quakes.mag:', quakes.mag.describe())
+print('quakes.depth:', quakes.depth.describe())
+
+```
+
+### Numpy is then used to find the median magnitude for quakes whose longitude is greater than 175
+```{python}
+import numpy as np
+np.median(quakes[quakes.long>175].mag)
+```
+
+### Reticulate can also be used to grab code from python and use it in R
+```{python}
+import pandas as pd
+quakes=pd.read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/datasets/quakes.csv",index_col=0)
+
+```
+
+```{r}
+df <- py$quakes
+
+mean_mag <- mean(quakes$mag)
+min_mag <- min(quakes$mag)
+max_mag <- max(quakes$mag)
+med_mag <- median(quakes$mag)
+
+paste("Mean mag: ", mean_mag)
+paste("Min mag: ", min_mag)
+paste("Max mag: ", max_mag)
+paste("Median mag: ", med_mag)
+```
+
+<center>
+![](/post/2020-12-11-python_files/IMG_6142.jpg){width = 80%}
+
